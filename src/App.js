@@ -1,17 +1,29 @@
-import './App.css';
-import Markdown from './components/MarkdownEditor'
+import React,{Component } from 'react';
+import {BrowserRouter as Router,Route} from 'react-router-dom'
+import DiplomadosPage from './pages/Diplomados/DiplamosPage'
+import NavbarComponent from './components/Navbar/NavbarComponent'
 
 function App() {
   return (
-    <div>
-      <div className="App">
-      <header>
-        <img src="https://i.ibb.co/zQCn3gw/colo-colo-logo-escudo-shield.png" className="App-logo"></img>
-      </header>
-      </div>
-      <Markdown/>
-    </div>
-    
+    <Router>
+      <NavbarComponent/>
+        <Route exact path="/" render = {() => {
+          return (
+            <div>
+                <h1>Home sweet home</h1>
+            </div>
+          )
+        }}>
+        </Route>
+        <Route path="/diplomados" render = {() => {
+          return (
+            <div>
+                <DiplomadosPage></DiplomadosPage>
+            </div>
+          )
+        }}>
+        </Route>
+    </Router>    
   );
 }
 
