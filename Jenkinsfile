@@ -10,7 +10,7 @@ pipeline {
         stage('Contruir imagen docker'){
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
-                 		sh 'sudo docker build -t frontend .'	
+                 		sh 'docker build -t frontend .'	
 	         	}
                 }             
         }
