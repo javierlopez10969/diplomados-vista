@@ -7,10 +7,23 @@ pipeline {
             } 
         }
 
-        stage('Levantar frontend'){
+        stage('Contruir imagen docker'){
                 steps{
-        		dir("/var/lib/jenkins/workspace/frontend"){
-                 		sh 'docker build -t forntend .'	
+        		dir("/var/lib/jenkins/workspace/Frontend"){
+                 		sh 'docker build -t frontend .'	
+	         	}
+                }             
+        }
+	stage('Subir imagen docker a hub'){
+                steps{
+        		dir("/var/lib/jenkins/workspace/Frontend"){
+	         	}
+                }             
+        }
+	stage('Correr imagen'){
+                steps{
+        		dir("/var/lib/jenkins/workspace/Frontend"){
+				sh 'docker run -p 80:8081  frontend'
 	         	}
                 }             
         }
