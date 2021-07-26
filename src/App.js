@@ -7,6 +7,10 @@ function App() {
   return (
     <Router>
       <NavbarComponent/>
+        { (process.env.NODE_ENV == 'development') 
+          ?<div> Estamos en desarrollo</div>
+          :<div> Estamos en el server</div>
+        }
         <Route exact path="/" render = {() => {
           return (
             <div>

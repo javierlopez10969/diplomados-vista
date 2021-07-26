@@ -98,13 +98,12 @@ function ControlledTabs(props) {
 export default class Diplomados extends Component {
     state = {
         diplomados: [],
-        urlApi: 'http://localhost:3000/'
+        urlApi: process.env.REACT_APP_BASE_URL
     }
     //Created de de vue
     componentDidMount() {
         //Obtener diplomados
-        const url = 'http://localhost:3000/diplomados';
-        axios.get(url).then(res => {
+        axios.get(process.env.REACT_APP_BASE_URL + 'diplomados').then(res => {
             const diplomados = res.data;
             this.setState({ diplomados });
           }).catch(error => {
@@ -114,7 +113,7 @@ export default class Diplomados extends Component {
     render() {
         return (
             <div>
-              <h1 >Diplomados </h1>
+              <h1 >Diplomados</h1>
               <ControlledTabs diplomados = {this.state.diplomados}> </ControlledTabs>
             </div>
         )
