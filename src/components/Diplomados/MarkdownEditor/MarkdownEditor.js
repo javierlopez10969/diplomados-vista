@@ -1,9 +1,8 @@
-import React from 'react';
+import React,{Component} from 'react';
 // Import the Markdown component
 import Markdown from 'react-markdown';
-import Form from 'react-bootstrap/Form';
 
-class MarkDownComponent extends React.Component {
+export default  class MarkDownComponent extends Component {
     constructor(props, context) {
         super(props, context);
         // Definir contenido de Markdown
@@ -22,5 +21,3 @@ class MarkDownComponent extends React.Component {
         );
     }
 }
-
-export default MarkDownComponent;
