@@ -1,6 +1,6 @@
 import React,{Component } from 'react';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
-import DiplomadosPage from './pages/Diplomados/DiplamosPage'
+import DiplomadosPage from './pages/DiplamosPage'
 import NavbarComponent from './components/Navbar/NavbarComponent'
 
 function App() {
