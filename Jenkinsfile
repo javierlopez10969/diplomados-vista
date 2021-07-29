@@ -6,7 +6,13 @@ pipeline {
                 echo "Iniciando"
             } 
         }
-
+	stage('Detener imagen anterior'){
+                steps{
+        		dir("/var/lib/jenkins/workspace/Frontend"){
+                 		sh 'docker stop frontend'	
+	         	}
+                }             
+        }
         stage('Contruir imagen docker'){
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
@@ -23,7 +29,7 @@ pipeline {
 	stage('Correr imagen'){
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
-				sh 'docker run -d -p 8081:5000 frontend'
+				sh 'docker run --name frontend -d -p 8081:5000 frontend'
 	         	}
                 }             
         }
