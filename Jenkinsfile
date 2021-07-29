@@ -9,13 +9,11 @@ pipeline {
 	stage('stop imagen docker if exist'){
 		
                 steps{
-			try{
-				dir("/var/lib/jenkins/workspace/Frontend"){
-                 			sh 'docker build -t frontend .'	
-			    	}
-			}catch (Exception e) {
-			    echo 'Something failed, I should sound the klaxons!'
+		
+			dir("/var/lib/jenkins/workspace/Frontend"){
+				sh 'docker stop frontend || true && docker rm frontend || true'	
 			}
+			
         		
                 }             
         }
