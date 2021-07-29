@@ -6,15 +6,6 @@ pipeline {
                 echo "Iniciando"
             } 
         }
-	stage('Example') {
-		try {
-		   sh 'docker stop frontend'
-		}
-		catch (exc) {
-		    echo 'Something failed, I should sound the klaxons!'
-		    throw
-		}
-	    }
         stage('Contruir imagen docker'){
 		
                 steps{
