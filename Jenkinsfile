@@ -6,15 +6,17 @@ pipeline {
                 echo "Iniciando"
             } 
         }
-	stage('Detener imagen anterior'){
-		
-		try {dir("/var/lib/jenkins/workspace/Frontend"){sh 'docker stop frontend'}}
-			catch (exc) {
-			    echo 'Something failed, I should sound the klaxons!'
-
-			}       
-        }
+	stage('Example') {
+		try {
+		   sh 'docker stop frontend'
+		}
+		catch (exc) {
+		    echo 'Something failed, I should sound the klaxons!'
+		    throw
+		}
+	    }
         stage('Contruir imagen docker'){
+		
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
                  		sh 'docker build -t frontend .'	
