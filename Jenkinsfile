@@ -23,7 +23,7 @@ pipeline {
 	stage('Correr imagen'){
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
-				sh 'docker run -p 8081:5000 frontend'
+				sh 'docker run -d -p 8081:5000 frontend'
 	         	}
                 }             
         }
