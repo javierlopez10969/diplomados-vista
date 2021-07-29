@@ -12,7 +12,7 @@ pipeline {
 				try {sh 'docker stop frontend'}
 				catch (exc) {
 				    echo 'Something failed, I should sound the klaxons!'
-				    throw
+				    
 				}
                  			
 	         	}
