@@ -7,16 +7,12 @@ pipeline {
             } 
         }
 	stage('Detener imagen anterior'){
-                steps{
-        		dir("/var/lib/jenkins/workspace/Frontend"){
-				try {sh 'docker stop frontend'}
-				catch (exc) {
-				    echo 'Something failed, I should sound the klaxons!'
-				    
-				}
-                 			
-	         	}
-                }             
+		
+		try {dir("/var/lib/jenkins/workspace/Frontend"){sh 'docker stop frontend'}}
+			catch (exc) {
+			    echo 'Something failed, I should sound the klaxons!'
+
+			}       
         }
         stage('Contruir imagen docker'){
                 steps{
