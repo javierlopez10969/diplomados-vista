@@ -9,7 +9,12 @@ pipeline {
 	stage('Detener imagen anterior'){
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
-                 		sh 'docker stop frontend'	
+				try {
+					sh 'docker stop frontend'
+				    } catch (err) {
+					echo "No se encuentra levantado un contenedor llamado frontend${err}"
+				    }
+                 			
 	         	}
                 }             
         }
