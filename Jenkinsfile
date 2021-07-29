@@ -6,6 +6,19 @@ pipeline {
                 echo "Iniciando"
             } 
         }
+	stage('stop imagen docker if exist'){
+		
+                steps{
+			try{
+				dir("/var/lib/jenkins/workspace/Frontend"){
+                 			sh 'docker build -t frontend .'	
+			    	}
+			}catch (Exception e) {
+			    echo 'Something failed, I should sound the klaxons!'
+			}
+        		
+                }             
+        }
         stage('Contruir imagen docker'){
 		
                 steps{
