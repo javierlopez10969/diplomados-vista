@@ -1,16 +1,14 @@
-import React,{Component } from 'react';
+import React from 'react';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
-import DiplomadosPage from './pages/Diplomados/DiplamosPage'
+import DiplomadosPage from './pages/DiplamosPage'
 import NavbarComponent from './components/Navbar/NavbarComponent'
+import Footer from './components/Footer/Footer';
+
 
 function App() {
   return (
     <Router>
       <NavbarComponent/>
-        { (process.env.NODE_ENV == 'development') 
-          ?<div> Estamos en desarrollo</div>
-          :<div> Estamos en el server</div>
-        }
         <Route exact path="/" render = {() => {
           return (
             <div>
@@ -19,7 +17,7 @@ function App() {
           )
         }}>
         </Route>
-        <Route path="/diplomados" render = {() => {
+        <Route exact path="/diplomados" render = {() => {
           return (
             <div>
                 <DiplomadosPage></DiplomadosPage>
@@ -27,6 +25,9 @@ function App() {
           )
         }}>
         </Route>
+        <p class="my-3 py-3">  </p>
+        <Footer></Footer>
+
     </Router>    
   );
 }
