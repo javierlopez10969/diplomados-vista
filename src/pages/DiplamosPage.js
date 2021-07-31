@@ -1,6 +1,6 @@
-import React,{Component,useState} from 'react';
+import React,{Component} from 'react';
 import axios from 'axios';
-import ControlledTabs from '../components/Diplomados/Navegacion/DiplomadosComponents'
+import ControlledTabs from '../components/Diplomados/DiplomadosComponents'
 export default class Diplomados extends Component {
     constructor(props) {
       super(props);
