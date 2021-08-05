@@ -15,7 +15,7 @@ export default class Diplomados extends Component {
         axios.get(process.env.REACT_APP_BASE_URL + 'diplomados').then(res => {
             var diplomados = res.data;
             this.setState({ diplomados });
-            this.getDocentes();
+           // this.getDocentes();
           }).catch(error => {
             console.log(error)
          });
