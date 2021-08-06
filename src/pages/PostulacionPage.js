@@ -7,7 +7,8 @@ export default class Postulacion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            diplomados: [], 
+            diplomados: [],
+            cantidad: null, 
             nombre: "",
             correo: "",
             telefono: "",
@@ -16,7 +17,7 @@ export default class Postulacion extends Component {
             mensajeTelefono: '',
             src_doc: "",
             diplomada: null,
-            id_postulante: 3
+            id_postulante: null
         }
     }
     
@@ -38,7 +39,7 @@ export default class Postulacion extends Component {
             mensajeNombre = "Debe ingresar su nombre completo.";
         }
 
-        if(!this.state.nombre.match(/^[a-zA-Z]+$/)){
+        if(!this.state.nombre.match(/^[a-zA-Z].+\s.+$$/)){
             mensajeNombre = "Debe ingresar solo letras."
         }
 
@@ -90,23 +91,22 @@ export default class Postulacion extends Component {
                 
             //limpiar formulario
             this.setState({ nombre: '', correo: '', telefono: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: ''})
+         
+            const postulationObject = {
+                src_doc: this.state.src_doc,
+                id_diplomado: this.state.diplomada,
+                id_postulante: this.state.cantidad + 1
+            };
+
+            axios.post(process.env.REACT_APP_BASE_URL + 'postulaciones/create', postulationObject)
+                .then((res) => {
+                    console.log(res.data)
+                }).catch((error) => {
+                    console.log(error)
+                });
+
+            this.setState({ src_doc: '', id_diplomado: '', id_postulante: ''})
         }
-
-        const postulationObject = {
-            src_doc: this.state.src_doc,
-            id_diplomado: this.state.diplomada,
-            id_postulante: this.state.id_postulante
-        };
-
-        axios.post(process.env.REACT_APP_BASE_URL + 'postulaciones/create', postulationObject)
-            .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            });
-
-        this.setState({ src_doc: '', id_diplomado: '', id_postulante: ''})
-
     };
 
     componentDidMount() {
@@ -117,6 +117,15 @@ export default class Postulacion extends Component {
             this.getAllDiplomado();
         }).catch(error => {
             console.log(error)
+        });
+
+        axios.get(process.env.REACT_APP_BASE_URL + 'postulantes/count')
+        .then(res => {
+        var cantidad = res.data;
+        this.setState ({
+            cantidad
+        })}).catch(error => {
+        console.log(error)
         });
     }
 
