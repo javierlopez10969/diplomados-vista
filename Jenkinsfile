@@ -35,7 +35,6 @@ pipeline {
 	stage('Subir imagen docker a hub'){
                 steps{
 			sh 'docker tag frontend ducktales10969/frontend:latest'	
-			sh 'docker login -u ducktales10969 -p chupalo123'	
 			sh 'docker push ducktales10969/frontend:latest'
                 }             
         }
