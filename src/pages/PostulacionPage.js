@@ -27,66 +27,66 @@ export default class Postulacion extends Component {
     };
     
     validate = () => {
-    let mensajeNombre = "";
-    let mensajeCorreo = "";
-    let mensajeTelefono = "";
+        let mensajeNombre = "";
+        let mensajeCorreo = "";
+        let mensajeTelefono = "";
 
-    if(!this.state.nombre) {
-        mensajeNombre = "Debe ingresar su nombre completo.";
-    }
+        if(!this.state.nombre) {
+            mensajeNombre = "Debe ingresar su nombre completo.";
+        }
 
-    if(!this.state.nombre.match(/^[a-zA-Z]+$/)){
-        mensajeNombre = "Debe ingresar solo letras."
-    }
+        if(!this.state.nombre.match(/^[a-zA-Z]+$/)){
+            mensajeNombre = "Debe ingresar solo letras."
+        }
 
-    if(!this.state.correo){
-        mensajeCorreo = "Debe ingresar un correo. Ejemplo: correo@gmail.com"
-    }
+        if(!this.state.correo){
+            mensajeCorreo = "Debe ingresar un correo. Ejemplo: correo@gmail.com"
+        }
 
-    if (!this.state.correo.includes("@") || !this.state.correo.includes(".")) {
-        mensajeCorreo = "Correo inválido. Ejemplo: correo@gmail.com";
-    }
+        if (!this.state.correo.includes("@") || !this.state.correo.includes(".")) {
+            mensajeCorreo = "Correo inválido. Ejemplo: correo@gmail.com";
+        }
 
-    if(!this.state.telefono){
-        mensajeTelefono = "Debe ingresar su número de teléfono."
-    }
+        if(!this.state.telefono){
+            mensajeTelefono = "Debe ingresar su número de teléfono."
+        }
 
-    if(this.state.telefono.length > 8 || this.state.telefono < 8){
-        mensajeTelefono = "El número de teléfono debe poseer 8 dígitos."
-    }
+        if(this.state.telefono.length > 8 || this.state.telefono.length < 8){
+            mensajeTelefono = "El número de teléfono debe poseer 8 dígitos."
+        }
 
-    if(!this.state.telefono.match(/^[0-9]+$/)){
-        mensajeTelefono = "El número de teléfono solo debe incluir números."
-    }
+        if(!this.state.telefono.match(/^[0-9]+$/)){
+            mensajeTelefono = "El número de teléfono solo debe incluir números."
+        }
 
-    if (mensajeNombre || mensajeCorreo || mensajeTelefono) {
-        this.setState({ mensajeNombre, mensajeCorreo, mensajeTelefono });
-        return false;
-    }
+        if (mensajeNombre || mensajeCorreo || mensajeTelefono) {
+            this.setState({ mensajeNombre, mensajeCorreo, mensajeTelefono });
+            return false;
+        }
 
-    return true;
+        return true;
     };
 
     handleSubmit = event => {
-    event.preventDefault();
-    const isValid = this.validate();
-    if (isValid) {
-        const userObject = {
-            nombre: this.state.nombre,
-            correo: this.state.correo,
-            num_telefono: '+56 9 ' + this.state.telefono
-        };
-        
-        axios.post(process.env.REACT_APP_BASE_URL + 'postulantes/create', userObject)
-        .then((res) => {
-            console.log(res.data)
-        }).catch((error) => {
-            console.log(error)
-        });
+        event.preventDefault();
+        const isValid = this.validate();
+        if (isValid) {
+            const userObject = {
+                nombre: this.state.nombre,
+                correo: this.state.correo,
+                num_telefono: '+56 9 ' + this.state.telefono
+            };
             
-        //limpiar formulario
-        this.setState({ nombre: '', correo: '', telefono: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: ''})
-    }
+            axios.post(process.env.REACT_APP_BASE_URL + 'postulantes/create', userObject)
+            .then((res) => {
+                console.log(res.data)
+            }).catch((error) => {
+                console.log(error)
+            });
+                
+            //limpiar formulario
+            this.setState({ nombre: '', correo: '', telefono: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: ''})
+        }
     };
 
     componentDidMount() {
