@@ -13,7 +13,10 @@ export default class Postulacion extends Component {
             telefono: "",
             mensajeNombre: '', 
             mensajeCorreo: '',
-            mensajeTelefono: ''
+            mensajeTelefono: '',
+            src_doc: "",
+            diplomada: null,
+            id_postulante: 3
         }
     }
     
@@ -74,10 +77,11 @@ export default class Postulacion extends Component {
             const userObject = {
                 nombre: this.state.nombre,
                 correo: this.state.correo,
-                num_telefono: '+56 9 ' + this.state.telefono
+                num_telefono: '+569' + this.state.telefono
             };
             
             axios.post(process.env.REACT_APP_BASE_URL + 'postulantes/create', userObject)
+
             .then((res) => {
                 console.log(res.data)
             }).catch((error) => {
@@ -87,6 +91,22 @@ export default class Postulacion extends Component {
             //limpiar formulario
             this.setState({ nombre: '', correo: '', telefono: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: ''})
         }
+
+        const postulationObject = {
+            src_doc: this.state.src_doc,
+            id_diplomado: this.state.diplomada,
+            id_postulante: this.state.id_postulante
+        };
+
+        axios.post(process.env.REACT_APP_BASE_URL + 'postulaciones/create', postulationObject)
+            .then((res) => {
+                console.log(res.data)
+            }).catch((error) => {
+                console.log(error)
+            });
+
+        this.setState({ src_doc: '', id_diplomado: '', id_postulante: ''})
+
     };
 
     componentDidMount() {
@@ -111,24 +131,27 @@ export default class Postulacion extends Component {
 
                     <Row >  
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Label>Diplomado</Form.Label>    
-                            <Form.Select aria-label="Default select example">
+                            <br>
+                            </br>
+                            <Form.Group className="mb-3" controlId="formBasicOption">
+                            <Form.Label>Diplomado</Form.Label>   
+                            <Form.Select aria-label="Default select example" onChange={e => this.setState({ diplomada: e.target.value })}>
                                 <option>Seleccione el diplomado al que desea postular</option>
-                                {this.state.diplomados.map(diplomado => <option value="1">{diplomado.titulo}</option>)}
+                                {this.state.diplomados.map(diplomado => <option value={diplomado.id} >{diplomado.titulo}</option>)}
                             </Form.Select>
-                            <br></br>
+                            </Form.Group>
+                            <br>
+                            </br>
                             <Form.Group className="mb-3" controlId="formBasicName">
                                 <Form.Label>Nombre</Form.Label>
                                 <Form.Control type="name" name="nombre" placeholder="Ingrese su nombre completo" value={this.state.nombre} onChange={this.handleChange}/>
                                 <div style={{color: "red"}}>{this.state.mensajeNombre}</div>
                             </Form.Group>
-
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Correo</Form.Label>
                                 <Form.Control type="email" name="correo" placeholder="Ingrese su correo." value={this.state.correo} onChange={this.handleChange}/>
                                 <div style={{color: "red"}}>{this.state.mensajeCorreo}</div>
                             </Form.Group>
-
                             <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
                                 <Form.Label>Número teléfonico</Form.Label>
                                 <InputGroup className="mb-3">
