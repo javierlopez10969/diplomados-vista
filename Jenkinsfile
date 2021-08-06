@@ -6,7 +6,7 @@ pipeline {
                 echo "Iniciando"
             } 
         }
-	stage('stop imagen docker if exist'){
+	stage('Parar la imagen anterior'){
 		
                 steps{
 		
