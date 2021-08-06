@@ -28,7 +28,9 @@ pipeline {
 	stage('Subir imagen docker a hub'){
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
+				sh 'docker tag frontend ducktales10969/frontend:latest'				
 	         	}
+			sh 'docker push ducktales10969/frontend:latest'
                 }             
         }
 	stage('Correr imagen'){
