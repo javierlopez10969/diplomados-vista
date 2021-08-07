@@ -1,8 +1,16 @@
 import React,{Component} from 'react';
-import { Navbar, Nav,NavDropdown,Container } from 'react-bootstrap';
+import { Navbar, Nav,NavDropdown,Container, Button } from 'react-bootstrap';
 
 export default class NavbarComponent extends Component {
     render() {
+        const cerrarSesion = ()=>{
+            window.localStorage.removeItem('loggedNoteAppUser')
+            window.location = '/';
+        }
+        const ingresar =()=>{
+            window.location = '/ingreso';
+        }
+        const loggedUserJSON = localStorage.getItem('loggedNoteAppUser')
         return (
         <Navbar collapseOnSelect bg="primary" variant="dark">
         <Container>
@@ -22,9 +30,17 @@ export default class NavbarComponent extends Component {
             </Nav>
             <Nav>
             <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-                Dank memes
+            {loggedUserJSON !== null && 
+            <Nav.Link eventKey={2} href="#listaPostulantes">
+                Postulantes
             </Nav.Link>
+            } 
+            {loggedUserJSON === null &&
+                <Button variant="outline-light" onClick={ingresar}>Ingreso admins</Button>
+            }
+            {loggedUserJSON !== null &&
+                <Button variant="outline-light" onClick={cerrarSesion}>Cerrar sesión</Button>
+            }
             </Nav>
         </Navbar.Collapse>
         </Container>
