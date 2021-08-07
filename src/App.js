@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
 import DiplomadosPage from './pages/DiplamosPage'
+import IngresoPage from './pages/IngresoPage'
 import NavbarComponent from './components/Navbar/NavbarComponent'
 import Footer from './components/Footer/Footer';
 
@@ -26,6 +27,15 @@ function App() {
         }}>
         </Route>
         <p class="my-3 py-3">  </p>
+        <Route exact path="/ingreso" render = {() => {
+          return (
+            <div>
+                <IngresoPage></IngresoPage>
+            </div>
+          )
+        }}>
+        </Route>
+        <p className="my-3 py-3">  </p>
         <Footer></Footer>
 
     </Router>    
