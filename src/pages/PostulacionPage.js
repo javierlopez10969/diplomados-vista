@@ -78,7 +78,8 @@ export default class Postulacion extends Component {
             const userObject = {
                 nombre: this.state.nombre,
                 correo: this.state.correo,
-                num_telefono: '+569' + this.state.telefono
+                num_telefono: '+569' + this.state.telefono,
+                
             };
             
             axios.post(process.env.REACT_APP_BASE_URL + 'postulantes/create', userObject)
@@ -174,7 +175,7 @@ export default class Postulacion extends Component {
                             <Form.Label>(Opcional)</Form.Label>
                             <br></br>
                             <Form.Label>Escoja los archivos que desea subir</Form.Label>
-                            <Form.Control type="file" multiple />
+                            <Form.Control type="file" multiple name="src_doc" value={this.state.src_doc} onChange={this.handleChange}/>
                             </Form.Group>
                             <br></br>
 
