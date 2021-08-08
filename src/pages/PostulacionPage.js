@@ -1,6 +1,33 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+<<<<<<< Updated upstream
 import {Button, Form, Container, Row, Col, InputGroup, Modal} from 'react-bootstrap';
+=======
+import {Button, Form, Container, Row, Col, InputGroup, FormFeedback} from 'react-bootstrap';
+import firebase from 'firebase';
+
+import "firebase/storage"
+
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+
+
+
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const config = {
+    apiKey: 'AIzaSyD2lHQGfkALCVootMtP5Q4oG21-y_pXVW4',
+    authDomain: 'proyecto-tingeso.firebaseapp.com',
+    projectId: 'proyecto-tingeso',
+    storageBucket: 'proyecto-tingeso.appspot.com',
+    messagingSenderId: '532912406725',
+    appId: '1:532912406725:web:063a5e5830ce0ec769f0ac',
+    measurementId: 'G-ZCJD1LSBN8'
+  };
+  // Initialize Firebase
+  export const app = firebase.initializeApp(config);
+
+>>>>>>> Stashed changes
 
 export default class Postulacion extends Component {
     
@@ -18,7 +45,11 @@ export default class Postulacion extends Component {
             src_doc: "",
             diplomada: null,
             id_postulante: null,
+<<<<<<< Updated upstream
             validatorV: null
+=======
+            uploadValue: 0
+>>>>>>> Stashed changes
         }
     }
     
@@ -30,7 +61,16 @@ export default class Postulacion extends Component {
             : event.target.value
         });
     };
-    
+    handleOnChange (event) {
+        const file = event.target.files[0]
+        const storageRef = firebase.storage().ref("id_postulante:/")
+        const fileRef = storageRef.child(file.name)
+        fileRef.put(file).then(() => {
+            console.log("Archivo subido")
+        })
+
+    };
+ 
     validate = () => {
         let mensajeNombre = "";
         let mensajeCorreo = "";
@@ -181,7 +221,8 @@ export default class Postulacion extends Component {
 
                             <Form.Group controlId="formFileMultiple" className="mb-3">
                             <Form.Label>Escoja los archivos que desea subir</Form.Label>
-                            <Form.Control type="file" multiple name="src_doc" value={this.state.src_doc} onChange={this.handleChange}/>
+                            <Form.Control type="file" multiple onChange={this.handleOnChange}/*name="src_doc" value={this.state.src_doc} onChange={this.handleChange}*//>
+                            
                             </Form.Group>
                             <br></br>
                             <Col md={{ span: 5, offset: 4 }}>
