@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import {Button, Form, Container, Row, Col, InputGroup, FormFeedback} from 'react-bootstrap';
+import {Button, Form, Container, Row, Col, InputGroup, Modal} from 'react-bootstrap';
 
 export default class Postulacion extends Component {
     
@@ -17,7 +17,8 @@ export default class Postulacion extends Component {
             mensajeTelefono: '',
             src_doc: "",
             diplomada: null,
-            id_postulante: null
+            id_postulante: null,
+            validatorV: null
         }
     }
     
@@ -71,10 +72,13 @@ export default class Postulacion extends Component {
         return true;
     };
 
+    
+
     handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
         if (isValid) {
+            let validatorV = "";
             const userObject = {
                 nombre: this.state.nombre,
                 correo: this.state.correo,
@@ -107,6 +111,10 @@ export default class Postulacion extends Component {
                 });
 
             this.setState({ src_doc: '', id_diplomado: '', id_postulante: ''})
+
+            validatorV = "Se ha creado la postulación con éxito"
+            this.setState({ validatorV });
+
         }
     };
 
@@ -138,7 +146,7 @@ export default class Postulacion extends Component {
                     <Col md={{ span: 6, offset: 4 }}>
                         <h1 > Ingresa tu Postulación! </h1>
                     </Col>
-
+                    
                     <Row >  
                         <Form onSubmit={this.handleSubmit}>
                             <br>
@@ -172,13 +180,14 @@ export default class Postulacion extends Component {
                             </Form.Group>
 
                             <Form.Group controlId="formFileMultiple" className="mb-3">
-                            <Form.Label>(Opcional)</Form.Label>
-                            <br></br>
                             <Form.Label>Escoja los archivos que desea subir</Form.Label>
                             <Form.Control type="file" multiple name="src_doc" value={this.state.src_doc} onChange={this.handleChange}/>
                             </Form.Group>
                             <br></br>
-
+                            <Col md={{ span: 5, offset: 4 }}>
+                                <h2 style={{color: "blue"}}> {this.state.validatorV} </h2>
+                            </Col>
+                            <br></br>
                             <Col md={{ span: 5, offset: 6 }}>
                                 <Button variant="primary" type="submit">
                                     Postular
