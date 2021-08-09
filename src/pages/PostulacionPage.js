@@ -1,11 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-<<<<<<< Updated upstream
-import {Button, Form, Container, Row, Col, InputGroup, Modal, FormFeedback} from 'react-bootstrap';
+import {Button, Form, Container, Row, Col, InputGroup} from 'react-bootstrap';
 
-=======
-import {Button, Form, Container, Row, Col, InputGroup, FormFeedback} from 'react-bootstrap';
->>>>>>> Stashed changes
 import firebase from 'firebase';
 
 import "firebase/storage"
@@ -46,12 +42,7 @@ export default class Postulacion extends Component {
             src_doc: "",
             diplomada: null,
             id_postulante: null,
-<<<<<<< Updated upstream
             validatorV: null
-=======
-            validatorV: null,
-            contador: 0,
->>>>>>> Stashed changes
             
         }
     }
@@ -208,9 +199,9 @@ export default class Postulacion extends Component {
                             </br>
                             <Form.Group className="mb-3" controlId="formBasicOption">
                             <Form.Label>Diplomado</Form.Label>   
-                            <Form.Select aria-label="Default select example" onChange={e => this.setState({ diplomada: e.target.value })}>
+                            <Form.Select aria-label="Default select example" name="diplomado" onChange={e => this.setState({ diplomada: e.target.value })}>
                                 <option>Seleccione el diplomado al que desea postular</option>
-                                {this.state.diplomados.map(diplomado => <option value={diplomado.id} >{diplomado.titulo}</option>)}
+                                {this.state.diplomados.map(diplomado => <option name={diplomado.titulo} value={diplomado.id} >{diplomado.titulo}</option>)}
                             </Form.Select>
                             </Form.Group>
                             <br>
@@ -236,16 +227,16 @@ export default class Postulacion extends Component {
 
                             <Form.Group controlId="formFileMultiple" className="mb-3">
                             <Form.Label>Escoja los archivos que desea subir</Form.Label>
-                            <Form.Control type="file" multiple onChange={this.handleOnChange}/*name="src_doc" value={this.state.src_doc} onChange={this.handleChange}*//>
+                            <Form.Control type="file" name="archivo" multiple onChange={this.handleOnChange}/*name="src_doc" value={this.state.src_doc} onChange={this.handleChange}*//>
                             
                             </Form.Group>
                             <br></br>
                             <Col md={{ span: 5, offset: 4 }}>
-                                <h2 style={{color: "blue"}}> {this.state.validatorV} </h2>
+                                <h2 style={{color: "blue"}} name="resultado" value={this.state.validatorV}> {this.state.validatorV} </h2>
                             </Col>
                             <br></br>
                             <Col md={{ span: 5, offset: 6 }}>
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" type="submit" name="submit">
                                     Postular
                                 </Button>
                             </Col>
