@@ -31,7 +31,12 @@ export default class NavbarComponent extends Component {
             </Nav>
             <Nav>
 
-            <a style={{textDecorationLine: 'none'}, {color: `rgba(255, 255, 255, .55)`}} href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</a>
+            {loggedUserJSON !== null &&
+
+                <Button  style={{textDecorationLine: 'none'},{color: `rgba(255, 255, 255, .55)`}} href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</Button>
+
+            }
+
             {loggedUserJSON !== null && 
             <Nav.Link eventKey={2} href="#listaPostulantes">
                 Postulantes
@@ -41,8 +46,12 @@ export default class NavbarComponent extends Component {
                 <Button variant="outline-light" onClick={ingresar}>Ingreso admins</Button>
             }
             {loggedUserJSON !== null &&
+
                 <Button variant="outline-light" onClick={cerrarSesion}>Cerrar sesión</Button>
+                
             }
+           
+
             </Nav>
         </Navbar.Collapse>
         </Container>
