@@ -1,11 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-<<<<<<< Updated upstream
-import {Button, Form, Container, Row, Col, InputGroup, FormFeedback} from 'react-bootstrap';
-=======
 import {Button, Form, Container, Row, Col, InputGroup, Modal, FormFeedback} from 'react-bootstrap';
 
->>>>>>> Stashed changes
 import firebase from 'firebase';
 
 import "firebase/storage"
@@ -46,13 +42,8 @@ export default class Postulacion extends Component {
             src_doc: "",
             diplomada: null,
             id_postulante: null,
-<<<<<<< Updated upstream
-            validatorV: null,
-            uploadValue: 0
-=======
             validatorV: null
             
->>>>>>> Stashed changes
         }
     }
     
