@@ -3,13 +3,9 @@ import axios from 'axios';
 import {Button, Form, Container, Row, Col, InputGroup} from 'react-bootstrap';
 
 import firebase from 'firebase';
-
 import "firebase/storage"
 
 <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
-
-
-
 
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -39,11 +35,11 @@ export default class Postulacion extends Component {
             mensajeNombre: '', 
             mensajeCorreo: '',
             mensajeTelefono: '',
+            mensajeSelect: '',
             src_doc: "",
             diplomada: null,
             id_postulante: null,
-            validatorV: null
-            
+            validatorV: null  
         }
     }
     
@@ -58,10 +54,12 @@ export default class Postulacion extends Component {
     };
     
  
+    //Validaciones
     validate = () => {
         let mensajeNombre = "";
         let mensajeCorreo = "";
         let mensajeTelefono = "";
+        let mensajeSelect = "";
 
         if(!this.state.nombre) {
             mensajeNombre = "Debe ingresar su nombre completo.";
@@ -91,30 +89,32 @@ export default class Postulacion extends Component {
             mensajeTelefono = "El número de teléfono solo debe incluir números."
         }
 
-        if (mensajeNombre || mensajeCorreo || mensajeTelefono) {
-            this.setState({ mensajeNombre, mensajeCorreo, mensajeTelefono });
+        if(!this.state.diplomada){
+            mensajeSelect = "Debe escojer uno de los diplomados."
+        }
+
+        if (mensajeNombre || mensajeCorreo || mensajeTelefono || mensajeSelect) {
+            this.setState({ mensajeNombre, mensajeCorreo, mensajeTelefono, mensajeSelect });
             return false;
         }
 
         return true;
     };
 
-    
-
     handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
+
         if (isValid) {
             let validatorV = "";
             const userObject = {
                 nombre: this.state.nombre,
                 correo: this.state.correo,
                 num_telefono: '+569' + this.state.telefono,
-                
             };
             
+            //Crear postulante
             axios.post(process.env.REACT_APP_BASE_URL + 'postulantes/create', userObject)
-
             .then((res) => {
                 console.log(res.data)
             }).catch((error) => {
@@ -122,7 +122,7 @@ export default class Postulacion extends Component {
             });
                 
             //limpiar formulario
-            this.setState({ nombre: '', correo: '', telefono: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: ''})
+            this.setState({ nombre: '', correo: '', telefono: '', diplomada: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: '', mensajeSelect: ''})
          
             const postulationObject = {
                 src_doc: this.state.src_doc,
@@ -130,6 +130,7 @@ export default class Postulacion extends Component {
                 id_postulante: this.state.cantidad + 1
             };
 
+            //Crear postulacion
             axios.post(process.env.REACT_APP_BASE_URL + 'postulaciones/create', postulationObject)
                 .then((res) => {
                     console.log(res.data)
@@ -157,6 +158,7 @@ export default class Postulacion extends Component {
             console.log(error)
         });
 
+        //Contar cantidad postulantes
         axios.get(process.env.REACT_APP_BASE_URL + 'postulantes/count')
         .then(res => {
         var cantidad = res.data;
@@ -203,9 +205,8 @@ export default class Postulacion extends Component {
                                 <option>Seleccione el diplomado al que desea postular</option>
                                 {this.state.diplomados.map(diplomado => <option name={diplomado.titulo} value={diplomado.id} >{diplomado.titulo}</option>)}
                             </Form.Select>
+                            <div style={{color: "red"}}>{this.state.mensajeSelect}</div>
                             </Form.Group>
-                            <br>
-                            </br>
                             <Form.Group className="mb-3" controlId="formBasicName">
                                 <Form.Label>Nombre</Form.Label>
                                 <Form.Control type="name" name="nombre" placeholder="Ingrese su nombre completo" value={this.state.nombre} onChange={this.handleChange}/>
@@ -213,7 +214,7 @@ export default class Postulacion extends Component {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Correo</Form.Label>
-                                <Form.Control type="email" name="correo" placeholder="Ingrese su correo." value={this.state.correo} onChange={this.handleChange}/>
+                                <Form.Control type="email" name="correo" placeholder="Ingrese su correo" value={this.state.correo} onChange={this.handleChange}/>
                                 <div style={{color: "red"}}>{this.state.mensajeCorreo}</div>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
