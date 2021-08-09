@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+<<<<<<< Updated upstream
 import {Button, Form, Container, Row, Col, InputGroup, Modal, FormFeedback} from 'react-bootstrap';
 
+=======
+import {Button, Form, Container, Row, Col, InputGroup, FormFeedback} from 'react-bootstrap';
+>>>>>>> Stashed changes
 import firebase from 'firebase';
 
 import "firebase/storage"
@@ -42,10 +46,16 @@ export default class Postulacion extends Component {
             src_doc: "",
             diplomada: null,
             id_postulante: null,
+<<<<<<< Updated upstream
             validatorV: null
+=======
+            validatorV: null,
+            contador: 0,
+>>>>>>> Stashed changes
             
         }
     }
+    
     
     handleChange = event => {
         const isCheckbox = event.target.type === "checkbox";
@@ -55,17 +65,7 @@ export default class Postulacion extends Component {
             : event.target.value
         });
     };
-    handleOnChange (event) {
-        for(let i = 0; i < event.target.files.length; i++)
-        {
-            const file = event.target.files[i]
-            const storageRef = firebase.storage().ref("Postulaciones/")
-            const fileRef = storageRef.child(file.name)
-            fileRef.put(file).then(() => {
-                console.log("Archivo subido")
-            })
-        }
-    };
+    
  
     validate = () => {
         let mensajeNombre = "";
@@ -146,10 +146,12 @@ export default class Postulacion extends Component {
                     console.log(error)
                 });
 
-            this.setState({ src_doc: '', id_diplomado: '', id_postulante: ''})
+            this.setState({ src_doc: '', id_diplomado: ''/*id_postulante: ''*/})
 
             validatorV = "Se ha creado la postulación con éxito"
             this.setState({ validatorV });
+
+            
 
         }
     };
@@ -173,6 +175,23 @@ export default class Postulacion extends Component {
         console.log(error)
         });
     }
+    
+    handleOnChange (event) {
+
+        let numero = Math.random()
+        for(let i = 0; i < event.target.files.length; i++)
+        {
+            const file = event.target.files[i]
+           
+            const storageRef = firebase.storage().ref(`Postulaciones/${numero}`)
+            const fileRef = storageRef.child(file.name)
+            fileRef.put(file).then(() => {
+                console.log("Archivo subido")
+            })
+
+        }
+        
+    };
 
     render() {
         return (
