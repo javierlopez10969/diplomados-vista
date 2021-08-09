@@ -1,3 +1,4 @@
+import { italic } from '@uiw/react-md-editor';
 import React,{Component} from 'react';
 import { Navbar, Nav,NavDropdown,Container, Button } from 'react-bootstrap';
 
@@ -29,7 +30,8 @@ export default class NavbarComponent extends Component {
             </NavDropdown>
             </Nav>
             <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
+
+            <a style={{textDecorationLine: 'none'}, {color: `rgba(255, 255, 255, .55)`}} href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</a>
             {loggedUserJSON !== null && 
             <Nav.Link eventKey={2} href="#listaPostulantes">
                 Postulantes
