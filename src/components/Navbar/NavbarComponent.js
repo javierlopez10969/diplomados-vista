@@ -19,31 +19,33 @@ export default class NavbarComponent extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
             <Nav.Link href="/diplomados">Diplomados</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
-            </Nav>
-            <Nav>
             <Nav.Link href="/postulacion">Postulación</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-                Dank memes
-            <Nav.Link href="#deets">More deets</Nav.Link>
+            </Nav>
+            
+            <Nav>
+
+
+            {loggedUserJSON !== null &&
+
+                <Button  style={{textDecorationLine: 'none'}  ,{color: `rgba(255, 255, 255, .55)`}} href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</Button>
+
+            }
+
             {loggedUserJSON !== null && 
-            <Nav.Link eventKey={2} href="#listaPostulantes">
+            <Nav.Link eventKey={2} href="/postulantes">
                 Postulantes
             </Nav.Link>
             } 
             {loggedUserJSON === null &&
-                <Button variant="outline-light" onClick={ingresar}>Ingreso admins</Button>
+                <Button name="iniciar sesion" variant="outline-light" onClick={ingresar}>Ingreso admins</Button>
             }
             {loggedUserJSON !== null &&
-                <Button variant="outline-light" onClick={cerrarSesion}>Cerrar sesión</Button>
+
+                <Button name="cerrar sesion"  variant="outline-light" onClick={cerrarSesion}>Cerrar sesión</Button>
+                
             }
+           
+
             </Nav>
         </Navbar.Collapse>
         </Container>
