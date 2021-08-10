@@ -29,6 +29,9 @@ export default class NavbarComponent extends Component {
             </NavDropdown>
             </Nav>
             <Nav>
+            <Nav.Link href="/postulacion">Postulación</Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+                Dank memes
             <Nav.Link href="#deets">More deets</Nav.Link>
             {loggedUserJSON !== null && 
             <Nav.Link eventKey={2} href="#listaPostulantes">
