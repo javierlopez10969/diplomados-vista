@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
 import DiplomadosPage from './pages/DiplamosPage'
 import PostulantesPage from './pages/PostulantesPage'
+import PostulacionPage from './pages/PostulacionPage'
 import NavbarComponent from './components/Navbar/NavbarComponent'
 import Footer from './components/Footer/Footer';
 
@@ -36,6 +37,14 @@ function App() {
         }}>
         </Route>
 
+        <Route exact path="/postulacion" render = {() => {
+          return (
+            <div>
+                <PostulacionPage></PostulacionPage>
+            </div>
+          )
+        }}>
+        </Route>
         <p class="my-3 py-3">  </p>
         <Footer></Footer>
 
