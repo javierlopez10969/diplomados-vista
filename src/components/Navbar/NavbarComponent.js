@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Navbar, Nav,NavDropdown,Container, Button } from 'react-bootstrap';
+import { Navbar, Nav,Container, Button } from 'react-bootstrap';
 
 export default class NavbarComponent extends Component {
     render() {
@@ -27,9 +27,9 @@ export default class NavbarComponent extends Component {
 
             {loggedUserJSON !== null &&
 
-                <Button  style={{textDecorationLine: 'none'}  ,{color: `rgba(255, 255, 255, .55)`}} href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</Button>
-
-            }
+                <Button  style={{textDecorationLine: "none",
+                                color: `rgba(255, 255, 255, .55)`}}
+                 href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</Button>}
 
             {loggedUserJSON !== null && 
             <Nav.Link eventKey={2} href="/postulantes">
