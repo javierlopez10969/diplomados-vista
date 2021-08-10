@@ -73,7 +73,7 @@ class InicioSesion extends Component {
                         </Col>
                     </Form.Group>
                     <div className="input-field">
-                        <Button variant="primary" onClick={()=>this.iniciarSesion()}>Iniciar</Button>
+                        <Button name = "submit" variant="primary" onClick={()=>this.iniciarSesion()}>Iniciar</Button>
                     </div>
                 {this.state.error === true &&
                     <div className="alert alert-danger" role="alert">
