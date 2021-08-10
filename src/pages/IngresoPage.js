@@ -9,8 +9,7 @@ class InicioSesion extends Component {
             email: "",
             password: ""
         },
-        error:false,
-        errorMsg:""
+        error:""
     }
     handleSubmit = e=>{
         e.preventDefault();
@@ -37,9 +36,12 @@ class InicioSesion extends Component {
         .then(response=>{
             if(response.length>0){
                 var respuesta=response;
+                let error;
                 window.localStorage.setItem(
                     'loggedNoteAppUser', JSON.stringify(respuesta)
                 )
+                error="Se ingreso correctamente"
+                this.setState({error});
                 window.location = '/';
             }
             else{
@@ -73,7 +75,7 @@ class InicioSesion extends Component {
                         </Col>
                     </Form.Group>
                     <div className="input-field">
-                        <Button variant="primary" onClick={()=>this.iniciarSesion()}>Iniciar</Button>
+                        <Button name="submit" variant="primary" onClick={()=>this.iniciarSesion()}>Iniciar</Button>
                     </div>
                 {this.state.error === true &&
                     <div className="alert alert-danger" role="alert">

@@ -1,4 +1,3 @@
-import { italic } from '@uiw/react-md-editor';
 import React,{Component} from 'react';
 import { Navbar, Nav,NavDropdown,Container, Button } from 'react-bootstrap';
 
@@ -33,7 +32,7 @@ export default class NavbarComponent extends Component {
 
             {loggedUserJSON !== null &&
 
-                <Button  style={{textDecorationLine: 'none'},{color: `rgba(255, 255, 255, .55)`}} href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</Button>
+                <Button  style={{textDecorationLine: 'none'}  ,{color: `rgba(255, 255, 255, .55)`}} href="https://console.firebase.google.com/u/1/" target="_blank">Drive postulaciones</Button>
 
             }
 
@@ -43,11 +42,11 @@ export default class NavbarComponent extends Component {
             </Nav.Link>
             } 
             {loggedUserJSON === null &&
-                <Button variant="outline-light" onClick={ingresar}>Ingreso admins</Button>
+                <Button name="iniciar sesion" variant="outline-light" onClick={ingresar}>Ingreso admins</Button>
             }
             {loggedUserJSON !== null &&
 
-                <Button variant="outline-light" onClick={cerrarSesion}>Cerrar sesión</Button>
+                <Button name="cerrar sesion" variant="outline-light" onClick={cerrarSesion}>Cerrar sesión</Button>
                 
             }
            
