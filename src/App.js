@@ -5,7 +5,9 @@ import PostulantesPage from './pages/PostulantesPage'
 import PostulacionPage from './pages/PostulacionPage'
 import IngresoPage from './pages/IngresoPage'
 import NavbarComponent from './components/Navbar/NavbarComponent'
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer/Footer'
+import Image from 'react-bootstrap/Image'
+import {Container, Col} from 'react-bootstrap';
 
 
 function App() {
@@ -15,7 +17,19 @@ function App() {
         <Route exact path="/" render = {() => {
           return (
             <div>
-                <h1>Home sweet home</h1>
+              
+              <Container>
+                <br></br>
+                <Col>
+                <h1>Sistema de Diplomados USACH.</h1>
+                </Col>
+              <Col md={{ span: 5, offset: 3 }}>
+                
+              
+              <br></br>
+                <Image src='https://www.mbausach.cl/wp-content/uploads/2021/02/usach-casa-central.jpg' />
+              </Col>
+            </Container>
             </div>
           )
         }}>
