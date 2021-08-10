@@ -6,7 +6,7 @@ pipeline {
                 echo "Iniciando"
             } 
         }
-	stage('stop imagen docker if exist'){
+	stage('Parar la imagen anterior'){
 		
                 steps{
 		
@@ -25,17 +25,17 @@ pipeline {
 	         	}
                 }             
         }
-	stage('Subir imagen docker a hub'){
-                steps{
-        		dir("/var/lib/jenkins/workspace/Frontend"){
-	         	}
-                }             
-        }
 	stage('Correr imagen'){
                 steps{
         		dir("/var/lib/jenkins/workspace/Frontend"){
 				sh 'docker run --rm --name frontend -d -p 8081:5000 frontend'
 	         	}
+                }             
+        }
+	stage('Subir imagen docker a hub'){
+                steps{
+			sh 'docker tag frontend ducktales10969/frontend:latest'	
+			sh 'docker push ducktales10969/frontend:latest'
                 }             
         }
         stage('Fin'){
