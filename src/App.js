@@ -21,7 +21,7 @@ function App() {
               <Container>
                 <br></br>
                 <Col>
-                <h1>Sistema de Diplomados USACH.</h1>
+                <h1>Sistema de Diplomados USACH.(2021)</h1>
                 </Col>
               <Col md={{ span: 5, offset: 3 }}>
                 
