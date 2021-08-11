@@ -122,7 +122,7 @@ export default class Postulacion extends Component {
             });
                 
             //limpiar formulario
-            this.setState({ nombre: '', correo: '', telefono: '', diplomada: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: '', mensajeSelect: ''})
+            this.setState({ nombre: '', correo: '', telefono: '', mensajeNombre: '', mensajeCorreo: '', mensajeTelefono: '', mensajeSelect: ''})
          
             const postulationObject = {
                 src_doc: this.state.src_doc,
